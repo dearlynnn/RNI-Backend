@@ -6,7 +6,7 @@ namespace UninunezRNIBackend.Repositories.AgreementsRequest
     {
         Task<List<AgreementRequest>> GetAllAsync();
 
-        Task<AgreementRequest> GetByIdAsync(Guid id);
+        Task<AgreementRequest?> GetByIdAsync(Guid id);
 
         Task<AgreementRequest> CreateAsync(AgreementRequest agreementRequest);
 

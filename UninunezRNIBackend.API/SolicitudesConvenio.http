@@ -1,0 +1,53 @@
+@baseUrl = https://localhost:7093
+@solicitudId = 12345678-1234-1234-1234-123456789012
+
+### Crear nueva solicitud de convenio
+POST {{baseUrl}}/api/solicitudes-convenio
+Content-Type: application/json
+
+{
+  "solicitanteNombre": "Juan Pérez García",
+  "solicitanteEmail": "juan.perez@uninunez.edu.co",
+  "solicitanteRol": "Profesor",
+  "solicitanteTelefono": "+57 300 123 4567",
+  "cargoSolicitante": "Director",
+  "tipoSolicitud": "FirmaInvestigacion",
+  "organizacionPropuesta": "Universidad Nacional de Colombia",
+  "requierePagoMembresia": true,
+  "valorPagoMembresia": 500.00,
+  "observaciones": "Solicitud para convenio de investigación en el área de inteligencia artificial",
+  "contactoNombre": "María González",
+  "contactoCargo": "Coordinadora de Investigación",
+  "contactoEmail": "maria.gonzalez@unal.edu.co",
+  "contactoTelefono": "+57 301 987 6543",
+  "documentosAdjuntosRuta": [
+    "documentos/propuesta_convenio.pdf",
+    "documentos/curriculum_vitae.pdf"
+  ]
+}
+
+###
+
+### Consultar solicitud como solicitante (vista pública)
+GET {{baseUrl}}/api/solicitudes-convenio/solicitante/{{solicitudId}}?requesterEmail=juan.perez@uninunez.edu.co
+Accept: application/json
+
+###
+
+### Consultar solicitud como personal RNI (vista completa)
+GET {{baseUrl}}/api/solicitudes-convenio/rni/{{solicitudId}}
+Accept: application/json
+
+###
+
+### Consultar solicitud usando el endpoint general (como solicitante)
+GET {{baseUrl}}/api/solicitudes-convenio/{{solicitudId}}?requesterEmail=juan.perez@uninunez.edu.co&isRniUser=false
+Accept: application/json
+
+###
+
+### Consultar solicitud usando el endpoint general (como RNI)
+GET {{baseUrl}}/api/solicitudes-convenio/{{solicitudId}}?isRniUser=true
+Accept: application/json
+
+###

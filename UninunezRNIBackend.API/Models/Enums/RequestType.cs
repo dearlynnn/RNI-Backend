@@ -1,5 +1,8 @@
-﻿namespace UninunezRNIBackend.Models.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace UninunezRNIBackend.Models.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum RequestType
     {
         FirmaInterinstitucional,

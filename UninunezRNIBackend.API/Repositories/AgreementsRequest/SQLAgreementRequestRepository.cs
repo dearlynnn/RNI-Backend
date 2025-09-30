@@ -42,9 +42,28 @@ namespace UninunezRNIBackend.Repositories.AgreementsRequest
             return await dbContext.AgreementRequests.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<AgreementRequest?> UpdateAsync(Guid id, AgreementRequest agreementRequest)
+        public async Task<AgreementRequest?> UpdateAsync(Guid id, AgreementRequest agreementRequest)
         {
-            throw new NotImplementedException();
+            var existingRequest = await dbContext.AgreementRequests.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (existingRequest == null)
+            {
+                return null;
+            }
+
+            existingRequest.ProposerName = agreementRequest.ProposerName;
+            existingRequest.ProposerEmail = agreementRequest.ProposerEmail;
+            existingRequest.Role = agreementRequest.Role;
+            existingRequest.ProposerPhone = agreementRequest.ProposerPhone;
+            existingRequest.Position = agreementRequest.Position;
+            existingRequest.Type = agreementRequest.Type;
+            existingRequest.ProposedOrganization = agreementRequest.ProposedOrganization;
+            existingRequest.RequiresMembershipPayment = agreementRequest.RequiresMembershipPayment;
+            existingRequest.MembershipPaymentAmount = agreementRequest.MembershipPaymentAmount;
+            existingRequest.RequestDate = agreementRequest.RequestDate;
+
+            await dbContext.SaveChangesAsync();
+            return existingRequest;
         }
     }
 }

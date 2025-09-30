@@ -34,45 +34,54 @@ namespace UninunezRNIBackend.Models.Domain
         public  RequestType Type { get; set; } = RequestType.FirmaInvestigacion;
 
         [Required]
-        [JsonPropertyName("proposedOrgnization")]
-        public string ProposedOrgnization { get; set; } = string.Empty;
+        [JsonPropertyName("organizacionPropuesta")]
+        public string ProposedOrganization { get; set; } = string.Empty;
 
         [Required]
-        [JsonPropertyName("requiresMembershipPayment")]
+        [JsonPropertyName("requierePagoMembresia")]
         public bool RequiresMembershipPayment { get; set; } = false;
 
-        [JsonPropertyName("membershipPaymentAmount")]
+        [JsonPropertyName("valorPagoMembresia")]
         public double? MembershipPaymentAmount { get; set; }
 
-        [JsonPropertyName("requestDate")]
+        [JsonPropertyName("fechaSolicitud")]
         public DateTime RequestDate { get; set; } = DateTime.Today;
 
-        [JsonPropertyName("status")]
+        [Required]
+        [JsonPropertyName("estadoSolicitud")]
         public RequestStatus Status { get; set; } = RequestStatus.Pending;
 
         [Required]
-        [JsonPropertyName("observations")]
+        [JsonPropertyName("observaciones")]
         public string Observations { get; set; } = string.Empty;
 
+        [JsonPropertyName("observacionesInternas")]
+        public string? InternalObservations { get; set; }
+
+        [JsonPropertyName("comentariosComite")]
+        public string? CommitteeComments { get; set; }
+
         [Required]
-        [JsonPropertyName("contactName")]
+        [JsonPropertyName("contactoNombre")]
         public string ContactName { get; set; } = string.Empty;
 
         [Required]
-        [JsonPropertyName("contactPosition")]
+        [JsonPropertyName("contactoCargo")]
         public string ContactPosition { get; set; } = string.Empty;
 
         [Required]
-        [JsonPropertyName("contactEmail")]
+        [JsonPropertyName("contactoEmail")]
         public string ContactEmail { get; set; } = string.Empty;
 
         [Required]
-        [JsonPropertyName("contactPhone")]
-        public int ContactPhone { get; set; } // o string para que acepte los caracteres + y () de otros países.
+        [JsonPropertyName("contactoTelefono")]
+        public string ContactPhone { get; set; } = string.Empty;
 
-        [Required]
-        [JsonPropertyName("AttachedDocumentsPath")]
+        [JsonPropertyName("documentosAdjuntosRuta")]
         public List<string> AttachedDocumentsPath { get; set; } = new List<string>();
+
+        // Propiedades de navegación
+        public virtual ICollection<AgreementRequestStatusHistory> StatusHistory { get; set; } = new List<AgreementRequestStatusHistory>();
 
     }
 }

@@ -1,7 +1,15 @@
-﻿namespace UninunezRNIBackend.Models.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace UninunezRNIBackend.Models.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ProposerPosition
     {
-        Director
+        Director,
+        Coordinador,
+        Jefe,
+        Decano,
+        Investigador,
+        Otro
     }
 }
